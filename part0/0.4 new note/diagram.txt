@@ -1,0 +1,34 @@
+Browser->Server:HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note\nForm data: { note: "watermelon" }
+
+note over Server:
+note received in req.body (form data) 
+is pushed to notes array in the form of
+an object along with the date
+end note
+
+Server-->Browser:Status: 302 (Redirect)\nLocation: /notes
+
+note over Browser:browser starts reloading the notes page
+
+Browser->Server:HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+Server-->Browser:notes page html code
+
+Browser->Server:HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+Server-->Browser:main.css stylesheet
+
+Browser->Server:HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+Server-->Browser:main.js script
+
+note over Browser:
+browser runs code from main.js and
+sends request to /data.json for notes
+end note
+
+Browser->Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+Server-->Browser: notes in json
+
+note over Browser:
+javascript displays the notes by
+creating ul and li elements using
+DOM API
+end note

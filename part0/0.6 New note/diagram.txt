@@ -1,0 +1,17 @@
+note over Browser:
+default handling of the form is stopped by
+the event handler form.onsubmit
+end note
+
+note over Browser:
+a new note object is created and
+added (pushed) to the notes array
+end note
+
+note over Browser:
+the notes list is rerendered
+using the DOM API
+end note
+
+Browser->Server:HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa\nJSON: {"content":"watermelon","date":"2021-08-02T15:50:21.474Z"}
+Server-->Browser:Status: 201 (Created) JSON: {message: "note created"}
