@@ -39,6 +39,7 @@ describe('adding a new blog', () => {
       .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .send(newBlog)
       .expect(201)
+      .expect('Content-Type', /application\/json/)
     
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
@@ -79,12 +80,45 @@ describe('adding a new blog', () => {
       .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .send(missingTitleBlog)
       .expect(400)
+      .expect('Content-Type', /application\/json/)
 
       await api
       .post('/api/blogs')
       .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .send(missingUrlBlog)
       .expect(400)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('returns 401 if a token is not provided', async () => {
+    const newBlog = {
+      title: 'Newly added blog',
+      author: 'Author of a new blog',
+      url: 'https://newblog.link',
+      likes: 46
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('returns 401 if a valid token is not provided', async () => {
+    const newBlog = {
+      title: 'Newly added blog',
+      author: 'Author of a new blog',
+      url: 'https://newblog.link',
+      likes: 46
+    }
+
+    await api
+      .post('/api/blogs')
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}makeThisInvalid`)
+      .send(newBlog)
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
   })
 })
 
