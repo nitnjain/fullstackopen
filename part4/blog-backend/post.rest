@@ -1,0 +1,40 @@
+POST http://localhost:3003/api/blogs/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pdGluIiwiaWQiOiI2MTllYWMxZWQ0ZDU4Mjg0N2U5ZjRlY2UiLCJpYXQiOjE2Mzc3ODg3NDN9.0AmYo0y7ArnBepiAd36ml2H8WwRHfCJSfIfcWq2gB0A
+
+{
+    "title": "nitin",
+    "author": "hehehe",
+    "url": "is this a url?",
+    "likes": 557
+}
+
+
+###
+GET http://localhost:3003/api/blogs/
+
+###
+GET http://localhost:3003/api/users/
+
+
+###
+POST http://localhost:3003/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "nitin2",
+    "password": "password",
+    "name": "Nitin"
+}
+
+//619eac1ed4d582847e9f4ece - nitin
+//619eac6dd4d582847e9f4ed9 - nitin2
+
+###
+POST http://localhost:3003/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "nitin",
+    "password": "password",
+}
